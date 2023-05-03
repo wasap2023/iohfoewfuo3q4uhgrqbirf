@@ -124,8 +124,7 @@
                 </select>
                 <div class="numbercontent">
                     <label for="phone" id="country-code-label">+52</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Ingresa tu número de teléfono" maxlength="10"
-                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Ingresa tu número de teléfono" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                 </div>
             </div>
             <button type="submit">SIG.</button>
@@ -139,6 +138,14 @@
     const countryCodeSelect = document.querySelector('#country-code');
     const countryCodeLabel = document.querySelector('#country-code-label');
 
+    phoneInput.addEventListener('input', (event) => {
+  const input = event.target.value;
+  if (input.length > 10) {
+    event.target.value = input.slice(0, 10);
+  }
+});
+
+    
     function getPhoneLength(countryCode) {
         //si el countryCode el +1, se debe añadir al input la propiedad maxlenght="10"
         if (countryCode === '+1') {
