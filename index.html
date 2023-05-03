@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wh</title>
+
+    <style>
+        * {
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #fff;
+            font-family: sans-serif;
+        }
+
+        #phone {
+            border-bottom: 2px solid #048374;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            background-color: transparent;
+        }
+
+        .login-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 25px;
+            font-weight: 600;
+            color: #048374;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .phone-input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            background-color: transparent;
+            border-bottom: 2px solid #048374;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            color: black;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-left: 10px;
+            border: none;
+            flex-grow: 1;
+        }
+
+        #country-code-label {
+            font-size: 16px;
+            margin-left: 10px;
+            border-bottom: 2px solid #048374;
+            border-top: none;
+            border-left: none;
+            color: black;
+            border-right: none;
+        }
+
+        button {
+            background-color: #03c13e;
+            color: #fff;
+            padding: 5px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            width: 80px;
+            margin-top: 120px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Verifica tu número</h1>
+        <form>
+            <label style="text-align:center;font-size:14px;margin-bottom:30px;color:#777;" for="phone">WhatsApp te enviará un SMS para verificar tu número de
+                teléfono. Introduce tu código de país y número de teléfono:</label>
+            <div class="phone-input-container">
+                <select id="country-code" name="country-code">
+                    <option value="+1">Estados Unidos</option>
+                    <option value="+52">México</option>
+                    <option value="+34">España</option>
+                    <option value="+54">Argentina</option>
+                    <option value="+55">Brasil</option>
+                    <option value="+56">Chile</option>
+                    <option value="+57">Colombia</option>
+                    <option value="+58">Venezuela</option>
+                    <option value="+51">Perú</option>
+                    <option value="+593">Ecuador</option>
+                    <option value="+502">Guatemala</option>
+                    <option value="+503">El Salvador</option>
+                    <option value="+504">Honduras</option>
+                    <option value="+505">Nicaragua</option>
+                    <option value="+506">Costa Rica</option>
+                    <option value="+507">Panamá</option>
+                    <option value="+51">Perú</option>
+                </select>
+                <div class="numbercontent">
+                    <label for="phone" id="country-code-label"></label>
+                    <input type="tel" id="phone" name="phone" placeholder="Ingresa tu número de teléfono" maxlength="10"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                </div>
+            </div>
+            <button type="submit">SIG.</button>
+        </form>
+    </div>
+
+</body>
+<script>
+    const form = document.querySelector('form');
+    const phoneInput = document.querySelector('#phone');
+    const countryCodeSelect = document.querySelector('#country-code');
+    const countryCodeLabel = document.querySelector('#country-code-label');
+
+    function getPhoneLength(countryCode) {
+        //si el countryCode el +1, se debe añadir al input la propiedad maxlenght="10"
+        if (countryCode === '+1') {
+            phoneInput.setAttribute('maxlength', '10');
+            return 10;
+        }
+        //si el countryCode el +52, se debe añadir al input la propiedad maxlenght="10"
+        if (countryCode === '+52') {
+            phoneInput.setAttribute('maxlength', '10');
+            return 10;
+        }
+        //si el countryCode el +34, se debe añadir al input la propiedad maxlenght="9"
+        if (countryCode === '+34') {
+            phoneInput.setAttribute('maxlength', '9');
+            return 9;
+        }
+        //si el countryCode el +54, se debe añadir al input la propiedad maxlenght="10"
+        if (countryCode === '+54') {
+            phoneInput.setAttribute('maxlength', '10');
+            return 10;
+        }
+    }
+
+    countryCodeSelect.addEventListener('change', () => {
+        const countryCode = countryCodeSelect.value;
+        countryCodeLabel.textContent = countryCode;
+        phoneInput.setAttribute('pattern', `\\d{${getPhoneLength(countryCode)}}`);
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const phoneNumber = phoneInput.value.trim();
+        if (phoneNumber.length !== getPhoneLength(countryCodeSelect.value)) {
+            alert('El número de teléfono no es válido.');
+            return;
+        }
+        // Aquí puedes continuar con la lógica de autenticación del número de teléfono
+        console.log(`El número de teléfono es ${countryCodeSelect.value}${phoneNumber}.`);
+    });
+
+
+</script>
+
+</html>

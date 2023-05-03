@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wh</title>
+
+    <style>
+      *{
+        font-family: sans-serif;
+      }
+      input{
+        width: 20px;
+        height: 40px;
+        border-bottom: 2px solid #ccc;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+        font-size: 20px;
+        margin-right: 10px;
+      }
+      .continputs{
+        border-bottom: 2px solid #048374;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        background-color: transparent;
+        padding-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 280px;
+        margin: 0 auto;
+        margin-bottom: 40px;
+      }
+      button{
+        background-color: #03c13e;
+            color: #fff;
+            padding: 5px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            width: 140px;
+            margin-top: 120px;
+      }
+      h1{
+        font-size: 22px;
+        font-weight: 600;
+        color: #048374;
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 65px;
+      }
+      .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .contglobal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .subt{
+        font-size: 14px;
+        color: #777;
+        text-align: center;
+        width: 80%;
+        margin-bottom: 30px;
+      }
+      .pequeslabel{
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      #contador{
+        color: #048374;
+        font-weight: 600;
+      }
+    </style>
+
+</head>
+<body onload="actualizarContador()">
+    <div class="contglobal">
+        <h1>Verificación de tu número</h1>
+        <p class="subt" >WhatsApp te envió un código de 6 dígitos al número que ingresaste. <a href="#">¿Número equivocado?</a></p>
+        <div class="continputcodigo">
+            <form class="form">
+              <div class="continputs">
+                <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" autofocus>
+                <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="text" maxlength="1" onkeyup="moveToNext(this)"onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="text" maxlength="1" onkeyup="moveToNext(this)"onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="text" maxlength="1" onkeyup="moveToNext(this)"onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+              </div>
+                <p class="pequeslabel" >Ingrese el código de 6 dígitos</p>
+                <p class="pequeslabel" >¿No recibiste el codigo?</p>
+                <p class="pequeslabel" >Puedes solicitar un nuevo código en <span id="contador" ></span></p>
+                <button type="submit">Continuar</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function moveToNext(input) {
+          var nextInput = input.nextElementSibling;
+          if (nextInput == null) {
+            input.blur();
+          } else {
+            nextInput.focus();
+          }
+        }
+
+        function actualizarContador() {
+          var tiempoRestante = 180; // 3 minutos en segundos
+          var contadorElemento = document.getElementById("contador");
+          
+          var intervalo = setInterval(function() {
+            var minutos = Math.floor(tiempoRestante / 60);
+            var segundos = tiempoRestante % 60;
+            
+            contadorElemento.textContent = minutos + ":" + (segundos < 10 ? "0" : "") + segundos;
+            
+            tiempoRestante--;
+            
+            if (tiempoRestante < 0) {
+              clearInterval(intervalo);
+              contadorElemento.textContent = "Tiempo agotado";
+            }
+          }, 1000);
+        }
+        
+
+      </script>
+</body>
+</html>
