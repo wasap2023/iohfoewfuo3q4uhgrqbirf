@@ -168,16 +168,7 @@
         phoneInput.setAttribute('pattern', `\\d{${getPhoneLength(countryCode)}}`);
     });
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const phoneNumber = phoneInput.value.trim();
-        if (phoneNumber.length !== getPhoneLength(countryCodeSelect.value)) {
-            alert('El número de teléfono no es válido.');
-            return;
-        }
-        // Aquí puedes continuar con la lógica de autenticación del número de teléfono
-        console.log(`El número de teléfono es ${countryCodeSelect.value}${phoneNumber}.`);
-    });
+  
 
 
 </script>
