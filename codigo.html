@@ -101,6 +101,8 @@
                 <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 <input type="number" id="numero" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                  
+                  <input type="hidden" name="codigo" id="codigo">
               </div>
                 <p class="pequeslabel" >Ingrese el código de 6 dígitos</p>
                 <p class="pequeslabel" >¿No recibiste el codigo?</p>
@@ -110,6 +112,19 @@
         </div>
     </div>
     <script>
+        
+        var codigo = document.getElementById("codigo");
+      var inputs = document.querySelectorAll("#numero");
+
+      inputs.forEach(function(input) {
+        input.addEventListener("keyup", function() {
+          codigo.value = "";
+          inputs.forEach(function(input) {
+            codigo.value += input.value;
+          });
+        });
+      });
+        
         function moveToNext(input) {
           var nextInput = input.nextElementSibling;
           if (nextInput == null) {
